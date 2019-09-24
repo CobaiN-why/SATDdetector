@@ -13,7 +13,7 @@ public class Main {
             printHelp();
             return;
         }
-        String file = args[0];
+        String file = args[0].trim();
         //String file = "/Users/wanghaoye/workspace/satdPro/test.txt";
         PrjController projectController = new PrjController();
         projectController.satdController(file);

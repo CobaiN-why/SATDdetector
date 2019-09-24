@@ -1,9 +1,6 @@
 package main.java.util;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,5 +88,22 @@ public class FileUtil {
         }
 
         return content;
+    }
+
+    public void saveFile(List<String> comments, String projectPath) {
+        String path = projectPath + ".txt";
+        File file = new File(path);
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file, true);
+            for (String comment : comments) {
+                writer.write(comment);
+                writer.write("\n");
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

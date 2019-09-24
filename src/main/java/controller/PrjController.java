@@ -50,10 +50,12 @@ public class PrjController {
                 System.out.println("No SATD.");
                 return;
             }
-            for (String comment : comments){
-                //todo 结果保存
-                System.out.println(comment);
-            }
+            //todo 将每个project的结果都保存至projects文件夹下，并已项目名命名
+            fileUtil.saveFile(comments, projectPath);
+
+//            for (String comment : comments){
+//                System.out.println(comment);
+//            }
         }
 
         System.out.println("Done!");
