@@ -5,7 +5,13 @@ SATD refers to self-admitted technical debt, which is introduced intentionally (
 ### How to use the SATDdetector ?
 Download binary: [SATDdetector.jar](https://github.com/ThJoker/SATDdetector/releases/download/v1.0/satdPro-1.0-SNAPSHOT.jar)
 
-Create a file containing the links to the github projects you need to parse. `./projects`
+Create a file containing the links to the github projects you need to parse. 
+github_list.txt:
+```bash
+https://github.com/Tbabm/SATDDetector-Core.git
+https://github.com/GoogleContainerTools/jib.git
+```
+
 
 ```bash
 $ java -jar satdPro-1.0-SNAPSHOT.jar github_list.txt
