@@ -41,7 +41,7 @@ public class ProjectUtil {
 
         @Override
         public void endTask() {
-            System.out.print("   Done");
+            System.out.println("Done.");
         }
 
         @Override
