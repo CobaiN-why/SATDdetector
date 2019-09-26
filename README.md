@@ -18,4 +18,4 @@ $ java -jar satdPro-1.0-SNAPSHOT.jar github_list.txt
 ```
 
 A dictionary named `./projects` will be created and the project needed to be parsed will be downloaded into the file `./projects`.
-SATDdetector will output the results in `./projects`(e.g. `./projects/project_name.txt`).
+SATDdetector will output the results in `./projects/project_name.txt`.
