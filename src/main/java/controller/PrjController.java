@@ -19,14 +19,14 @@ public class PrjController {
 
         List<String> fileList = new ArrayList<>();
         for (String git : gitList){
-            String prjName = git.substring(git.lastIndexOf('/') + 1, git.lastIndexOf('.'));
+            String prjName = git.substring(git.lastIndexOf("github.com/") + 11, git.lastIndexOf('.'));
             fileList.add(prjName);
         }
         List<String> deleted = fileUtil.createDir("projects", fileList);
 
         //下载需要分析所缺少的项目
         for (String gitUri : gitList) {
-            if (deleted.contains(gitUri.substring(gitUri.lastIndexOf('/') + 1, gitUri.lastIndexOf('.'))))
+            if (deleted.contains(gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'))))
                 continue;
             System.out.println("Downloading the project: " + gitUri);
             projectUtil.downloadProject(gitUri);
@@ -35,8 +35,8 @@ public class PrjController {
 
         //对每个项目进行分析
         for (String gitUri : gitList) {
-            String projectName = gitUri.substring(gitUri.lastIndexOf('/'), gitUri.lastIndexOf('.'));
-            String projectPath = "./projects" + projectName;
+            String projectName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
+            String projectPath = "./projects/" + projectName;
 
             System.out.println("Analyzing the " + projectName);
 

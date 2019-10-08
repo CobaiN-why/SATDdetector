@@ -13,7 +13,7 @@ public class ProjectUtil {
 
     public void downloadProject(String gitUri){
         try {
-            String prjName = gitUri.substring(gitUri.lastIndexOf('/'), gitUri.lastIndexOf('.'));
+            String prjName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
             File file = new File("./projects/" + prjName);
             if (!file.exists())
                 Git.cloneRepository().setURI(gitUri).setDirectory(file).setProgressMonitor(new SimpleProgressMonitor()).call();
