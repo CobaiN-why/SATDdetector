@@ -14,7 +14,7 @@ public class Main {
             return;
         }
         String file = args[0].trim();
-        //String file = "/Users/wanghaoye/workspace/SATDdetector/test.txt";
+//        String file = "/Users/wanghaoye/workspace/SATDdetector/test.txt";
         PrjController projectController = new PrjController();
         projectController.satdController(file);
     }
