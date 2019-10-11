@@ -18,4 +18,5 @@ $ java -jar satdPro-1.0-SNAPSHOT.jar github_list.txt
 ```
 
 A dictionary named `./projects` will be created and the project needed to be parsed will be downloaded into the file `./projects`.
+(If the project is too large, it may cause the download to fail. Maybe you should download manually and named the file like GoogleContainerTools-jib.)
 SATDdetector will output the results in `./projects/project_name.txt`.

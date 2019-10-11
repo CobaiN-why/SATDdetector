@@ -53,7 +53,8 @@ public class FileUtil {
 
         String[] content = file.list();//取得当前目录下所有文件和文件夹
         for(String name : content){
-            if (fileList.contains(name)){
+            String tmp = name.replaceAll("-", "/");
+            if (fileList.contains(tmp)){
                 deleted.add(name);
                 continue;
             }

@@ -1,9 +1,7 @@
 package test.java;
-import org.eclipse.jgit.api.LogCommand;
-import org.eclipse.jgit.api.ResetCommand.ResetType;
+
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
-import org.eclipse.jgit.revwalk.RevWalk;
 import org.junit.Test;
 import org.eclipse.jgit.api.Git;
 

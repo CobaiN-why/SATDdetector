@@ -36,6 +36,7 @@ public class PrjController {
         //对每个项目进行分析
         for (String gitUri : gitList) {
             String projectName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
+            projectName = projectName.replaceAll("/", "-");
             String projectPath = "./projects/" + projectName;
 
             System.out.println("Analyzing the " + projectName);
