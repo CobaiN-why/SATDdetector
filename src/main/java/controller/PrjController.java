@@ -66,31 +66,41 @@ public class PrjController {
         }
     }
 
+    public void scanOnePrj(String filePath, String tagName){
+        FileUtil fileUtil = new FileUtil();
+        //AST构建，提取SATD comment
+        ProjectScanner projectScanner = new ProjectScanner();
+        List<String> comments = projectScanner.getSatd(filePath);
+        //将所有分析结果保存 判断结果是否为空
+        if (comments == null || comments.size() == 0){
+            System.out.println("No SATD.");
+            return;
+        }
+        fileUtil.saveFile(comments, filePath + tagName);
+    }
+
     public void versionController(int versionNum, List<String> gitList){
         for (String gitUri : gitList){
             String prjName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
+            System.out.println("Analyzing the " + prjName);
             String filePath = "./projects/" + prjName.replaceAll("/", "-");
 
             try {
                 Git git = Git.open(new File(filePath));
                 Repository repository = git.getRepository();
 
-                Map<Integer, String> commits = new TreeMap<Integer, String>();
-                Iterable<RevCommit> logHistory = git.log().call();
-                for (RevCommit revCommit : logHistory){
-                    String commitId = revCommit.getName();//获取commit id
-                    System.out.println(commitId);
-                    int commitTime = revCommit.getCommitTime();   //Fri Oct 6 10:30:26 2017 会按照秒转化为INT，从最早的开始找
-                    commits.put(commitTime, commitId);
-                }
-
                 List<Ref> call = git.tagList().call();
-                for (Ref ref : call) {
-                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                int lenCall = call.size();
+                for (int i = lenCall - 1 ; i >= lenCall-versionNum ; i--) {
+                    Ref ref = call.get(i);
+                    String tagName = ref.getName().substring(10);
+                    String commitName = ref.getObjectId().getName();
+                    System.out.println("Switch to the version: " + tagName);
+                    git.checkout().setName(commitName).call();//将所有的commitId记录后，直接用checkout命令切换版本
+                    scanOnePrj(filePath, tagName);
+                    //重新至恢复master分支
+                    git.checkout().setName("master").call();
                 }
-
-                //todo: 根据排序后的commit list按时间分析
-                git.checkout().setName("master").call();//将所有的commitId记录后，直接用checkout命令切换版本
             } catch (Exception e) {
                 e.printStackTrace();
             }

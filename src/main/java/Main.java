@@ -16,17 +16,20 @@ public class Main {
             return;
         }
         String file = args[0].trim();
-//        String file = "/Users/wanghaoye/workspace/SATDdetector/test.txt";
+        int versionNum = Integer.parseInt(args[1].trim());
+
+        //String file = "/Users/wanghaoye/workspace/SATDdetector/gitlist.txt";
         PrjController projectController = new PrjController();
         List<String> gitList = projectController.dowmloadController(file);
-        projectController.scanController(gitList);
+        // projectController.scanController(gitList);
+        projectController.versionController(versionNum, gitList);
 
         System.out.println("Done!");
     }
 
     private static void printHelp() {
-        System.out.println("Please specify the github uri list.");
-        System.out.println("For example:\n$ java -jar satd_detector.jar list.txt");
+        System.out.println("Please specify the github uri list and the number of version need to parse.");
+        System.out.println("For example:\n$ java -jar satd_detector.jar list.txt 6");
     }
 
 }
