@@ -35,7 +35,7 @@ public class ProjectScanner {
                         satds.add(content);
                     }
                 }
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 

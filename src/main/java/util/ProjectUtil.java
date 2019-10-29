@@ -2,7 +2,9 @@ package main.java.util;
 
 
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.ProgressMonitor;
+import org.eclipse.jgit.transport.HttpConfig;
 
 import java.io.File;
 

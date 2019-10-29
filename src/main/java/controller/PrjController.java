@@ -3,16 +3,23 @@ package main.java.controller;
 import main.java.service.ProjectScanner;
 import main.java.util.FileUtil;
 import main.java.util.ProjectUtil;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.Ref;
+import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.revwalk.RevCommit;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by wanghaoye on 2019/9/17.
  */
 public class PrjController {
 
-    public void satdController(String file){
+    public List<String> dowmloadController(String file){
         FileUtil fileUtil = new FileUtil();
         List<String> gitList = fileUtil.readFile(file);
         ProjectUtil projectUtil = new ProjectUtil();
@@ -33,6 +40,12 @@ public class PrjController {
         }
         System.out.println("All the projects have been downloaded!");
 
+        return gitList;
+
+    }
+
+    public void scanController(List<String> gitList){
+        FileUtil fileUtil = new FileUtil();
         //对每个项目进行分析
         for (String gitUri : gitList) {
             String projectName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
@@ -41,8 +54,6 @@ public class PrjController {
 
             System.out.println("Analyzing the " + projectName);
 
-//
-//            projectPath = "/Users/wanghaoye/workspace";
             //AST构建，提取SATD comment
             ProjectScanner projectScanner = new ProjectScanner();
             List<String> comments = projectScanner.getSatd(projectPath);
@@ -51,14 +62,39 @@ public class PrjController {
                 System.out.println("No SATD.");
                 return;
             }
-            //todo 将每个project的结果都保存至projects文件夹下，并已项目名命名
             fileUtil.saveFile(comments, projectPath);
-
-//            for (String comment : comments){
-//                System.out.println(comment);
-//            }
         }
+    }
 
-        System.out.println("Done!");
+    public void versionController(int versionNum, List<String> gitList){
+        for (String gitUri : gitList){
+            String prjName = gitUri.substring(gitUri.lastIndexOf("github.com/") + 11, gitUri.lastIndexOf('.'));
+            String filePath = "./projects/" + prjName.replaceAll("/", "-");
+
+            try {
+                Git git = Git.open(new File(filePath));
+                Repository repository = git.getRepository();
+
+                Map<Integer, String> commits = new TreeMap<Integer, String>();
+                Iterable<RevCommit> logHistory = git.log().call();
+                for (RevCommit revCommit : logHistory){
+                    String commitId = revCommit.getName();//获取commit id
+                    System.out.println(commitId);
+                    int commitTime = revCommit.getCommitTime();   //Fri Oct 6 10:30:26 2017 会按照秒转化为INT，从最早的开始找
+                    commits.put(commitTime, commitId);
+                }
+
+                List<Ref> call = git.tagList().call();
+                for (Ref ref : call) {
+                    System.out.println("Tag: " + ref + " " + ref.getName() + " " + ref.getObjectId().getName());
+                }
+
+                //todo: 根据排序后的commit list按时间分析
+                git.checkout().setName("master").call();//将所有的commitId记录后，直接用checkout命令切换版本
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }

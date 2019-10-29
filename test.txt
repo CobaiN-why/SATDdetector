@@ -1,5 +1,3 @@
-https://github.com/Tbabm/SATDDetector-Core.git
-https://github.com/GoogleContainerTools/jib.git
 https://github.com/Shopify/kafka-monitor.git
 https://github.com/mulesoft/gmail-connector.git
 https://github.com/adobe/toughday2.git
@@ -7,6 +5,6 @@ https://github.com/HubSpot/polyglot.git
 https://github.com/spotify/mobius.git
 https://github.com/Bilibili/boxing.git
 https://github.com/synchronoss/gcm.git
-https://github.com/IBM/ibm-cloud-devops.git
 https://github.com/google/flogger.git
 https://github.com/google/gulava.git
+https://github.com/Microsoft/Dhalion.git
