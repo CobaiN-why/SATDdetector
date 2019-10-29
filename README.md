@@ -13,10 +13,11 @@ https://github.com/GoogleContainerTools/jib.git
 ```
 
 
+Then specify the github uri list and the number of version need to parse.
 ```bash
-$ java -jar satdPro-1.0-SNAPSHOT.jar github_list.txt
+$ java -jar satdPro-1.0-SNAPSHOT.jar github_list.txt 6
 ```
 
 A dictionary named `./projects` will be created and the project needed to be parsed will be downloaded into the file `./projects`.
 (If the project is too large, it may cause the download to fail. Maybe you should download manually and named the file like GoogleContainerTools-jib.)
-SATDdetector will output the results in `./projects/project_name.txt`.
+SATDdetector will output the results in `./projects/project_name + version_tag.txt`.
