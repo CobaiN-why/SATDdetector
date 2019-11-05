@@ -11,14 +11,15 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-            printHelp();
-            return;
-        }
-        String file = args[0].trim();
-        int versionNum = Integer.parseInt(args[1].trim());
+//        if (args.length != 2) {
+//            printHelp();
+//            return;
+//        }
+//        String file = args[0].trim();
+//        int versionNum = Integer.parseInt(args[1].trim());
 
-        //String file = "/Users/wanghaoye/workspace/SATDdetector/gitlist.txt";
+        String file = "/Users/wanghaoye/workspace/SATDdetector/gitlist.txt";
+        int versionNum = 2;
         PrjController projectController = new PrjController();
         List<String> gitList = projectController.dowmloadController(file);
         // projectController.scanController(gitList);
