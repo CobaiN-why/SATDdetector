@@ -110,7 +110,7 @@ public class PrjController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //todo: 对satdVersions（按照最新，往前N个版本）进行分析
+            //对satdVersions（按照最新，往前N个版本）进行分析
             ExcelUtil excelUtil = new ExcelUtil();
             CommentComparator commentComparator = new CommentComparator();
 

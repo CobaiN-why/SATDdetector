@@ -19,7 +19,7 @@ public class Main {
         int versionNum = Integer.parseInt(args[1].trim());
 
 //        String file = "/Users/wanghaoye/workspace/SATDdetector/gitlist.txt";
-//        int versionNum = 6;
+//        int versionNum = 2;
         PrjController projectController = new PrjController();
         List<String> gitList = projectController.dowmloadController(file);
         // projectController.scanController(gitList);

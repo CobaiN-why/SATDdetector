@@ -63,4 +63,22 @@ public class TestGit {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testRemoce(){
+        List<String> a = new ArrayList<>();
+        List<String> b = new ArrayList<>();
+        a.add("a");
+        a.add("b");
+        a.add("c");
+        a.add("d");
+        b.add("c");
+        b.add("d");
+        b.add("e");
+        b.add("f");
+        b.add("c");
+        b.remove("c");
+        //b.removeAll(a);
+        System.out.println(b);
+    }
 }

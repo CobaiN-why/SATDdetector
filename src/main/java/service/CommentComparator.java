@@ -8,8 +8,12 @@ public class CommentComparator {
         List<List<String>> result = new ArrayList<>();
         List<String> diffA = new ArrayList<>(last); //在第二个版本时去除的
         List<String> diffB = new ArrayList<>(now); //在第二个版本时新加的
-        diffA.removeAll(now);
-        diffB.removeAll(last);
+        for (String tmp : now){
+            diffA.remove(tmp);
+        }
+        for (String tmp : last){
+            diffB.remove(tmp);
+        }
         result.add(diffA);
         result.add(diffB);
         return result;
