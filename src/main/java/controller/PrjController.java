@@ -110,14 +110,20 @@ public class PrjController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //todo: 对satdVersions（按照最新，往前N个版本）进行分析，
-            int lastCount = 0;
-            List<String> lastComments = satdVersions.get(versionNum-1);
+            //todo: 对satdVersions（按照最新，往前N个版本）进行分析
+            ExcelUtil excelUtil = new ExcelUtil();
             CommentComparator commentComparator = new CommentComparator();
+
+            List<String> lastComments = satdVersions.get(versionNum-1);
+            String lastTag = tagNames.get(versionNum-1);
+
             for (int i = versionNum-2; i >= 0; i--){ //这样就是从最早的一个version开始分析
                 List<String> nowComments = satdVersions.get(i);
+                String nowTag = tagNames.get(i);
                 List<List<String>> compare = commentComparator.commentCmp(lastComments, nowComments);
-                // todo 包括每个版本包含的satd数量，增加和减少的satd是哪些？
+                excelUtil.saveDiff(filePath, lastTag, nowTag, compare.get(0), compare.get(1), lastComments.size(), nowComments.size());
+                lastTag = nowTag;
+                lastComments = nowComments;
             }
         }
     }
